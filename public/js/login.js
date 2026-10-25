@@ -1,0 +1,11 @@
+import {api,icon,formModal,field,toast} from './components.js';
+const roles=['admin','warden','student','security','maintenance','laundry'];
+const passwords={admin:'Admin@123',warden:'Warden@123',student:'Student@123',security:'Security@123',maintenance:'Maintenance@123',laundry:'Laundry@123'};
+document.querySelector('#show-password').innerHTML=icon('eye',19);
+document.querySelector('#show-password').onclick=e=>{const p=document.querySelector('#password');p.type=p.type==='password'?'text':'password';e.currentTarget.setAttribute('aria-label',p.type==='password'?'Show password':'Hide password');};
+document.querySelector('#demo-roles').innerHTML=roles.map(r=>`<button type="button" data-role="${r}">${r[0].toUpperCase()+r.slice(1)}</button>`).join('');
+function select(role){if(!roles.includes(role))return;document.querySelector('#email').value=`${role}@smartstay.edu`;document.querySelector('#password').value=passwords[role];document.querySelector('#demo-credentials').textContent=`${role}@smartstay.edu · ${passwords[role]}`;document.querySelectorAll('[data-role]').forEach(b=>b.classList.toggle('selected',b.dataset.role===role));}
+document.querySelector('#demo-roles').onclick=e=>{const b=e.target.closest('[data-role]');if(b)select(b.dataset.role);};
+select(new URLSearchParams(location.search).get('role')||'admin');
+document.querySelector('#login-form').onsubmit=async e=>{e.preventDefault();const btn=e.currentTarget.querySelector('[type=submit]');btn.disabled=true;btn.textContent='Signing in…';document.querySelector('#login-error').textContent='';try{const d=await api('auth/login','POST',{email:document.querySelector('#email').value,password:document.querySelector('#password').value,remember:e.currentTarget.elements.remember.checked});location.href=d.redirect;}catch(err){document.querySelector('#login-error').textContent=err.message;btn.disabled=false;btn.innerHTML='Sign in to SmartStay <span>→</span>';}};
+document.querySelector('#forgot').onclick=()=>formModal('Recover your account',[field('email','Campus email','email')],{email:document.querySelector('#email').value},async d=>{const result=await api('auth/forgot','POST',d);toast(result.message);},{subtitle:'The residence office will verify your identity before resetting access.',submit:'Request account recovery',wide:false});

@@ -1,0 +1,61 @@
+/* Campus access cards. Scoped to the login page; shared theme tokens stay intact. */
+.role-first-login { --login-muted: #596b82; }
+:root[data-theme="dark"] .role-first-login { --login-muted: var(--text-secondary); }
+.role-first-login .login-form-wrap { max-width: 432px; margin: 30px auto 24px; }
+.role-first-login .login-form-wrap > .muted { color: var(--login-muted); }
+.role-first-login .campus-access { margin-top: 25px; }
+.role-first-login .campus-access h3 { font-size: 14px; letter-spacing: -.15px; }
+.role-first-login .campus-access > p { font-size: 12px; color: var(--login-muted); margin-top: 3px; }
+.role-first-login .campus-role-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 9px; margin-top: 13px; }
+.role-first-login .campus-role-card {
+  position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 4px;
+  min-width: 0; padding: 13px 12px 12px; min-height: 95px; text-align: left;
+  background: var(--surface); border: 1px solid var(--border-default); border-radius: var(--radius-control);
+  color: var(--text-primary); transition: border-color .18s, background-color .18s, box-shadow .18s, transform .18s;
+}
+.role-first-login .campus-role-icon { display: inline-flex; color: var(--login-muted); margin-bottom: 3px; transition: color .18s; }
+.role-first-login .campus-role-card b { font-size: 12px; font-weight: 600; line-height: 1.4; }
+.role-first-login .campus-role-card small { font-size: 10px; color: var(--login-muted); line-height: 1.4; }
+.role-first-login .campus-role-card:hover:not(:disabled) { border-color: var(--border-interactive); transform: translateY(-1px); box-shadow: var(--shadow-card); }
+.role-first-login .campus-role-card[aria-selected="true"] { border-color: var(--border-focus); background: var(--info-surface); box-shadow: var(--shadow-card); transform: translateY(-1px); }
+.role-first-login .campus-role-card[aria-selected="true"] .campus-role-icon { color: var(--primary-text); }
+.role-first-login .role-check { position: absolute; top: 10px; right: 10px; display: grid; place-items: center; width: 16px; height: 16px; border-radius: 50%; background: var(--primary); color: var(--on-primary); opacity: 0; transition: opacity .18s; }
+.role-first-login .campus-role-card[aria-selected="true"] .role-check { opacity: 1; }
+.role-first-login .campus-role-card:focus-visible { outline: 2px solid var(--border-focus); outline-offset: 2px; box-shadow: none; }
+.role-first-login .login-details { border-top: 1px solid var(--border); margin-top: 23px; padding-top: 20px; }
+.role-first-login #login-heading { font-size: 16px; letter-spacing: -.25px; }
+.role-first-login #login-form { margin: 17px 0 0; }
+.role-first-login #login-form > label { margin-bottom: 16px; }
+.role-first-login .login-email-help { display: block; font-size: 11px; margin-top: 7px; color: var(--login-muted); }
+.role-first-login #admin-code-label > small { display: block; font-size: 11px; margin-top: 7px; color: var(--login-muted); }
+.role-first-login #login-form [type="submit"] { position: relative; justify-content: center; }
+.role-first-login #login-submit-label { margin: 0; }
+.role-first-login .login-submit-arrow { margin: 0; position: absolute; right: 18px; }
+.role-first-login .login-register { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 2px 7px; margin-top: 17px; font-size: 12px; color: var(--login-muted); }
+.role-first-login .login-register a { display: inline-flex; align-items: center; gap: 7px; padding: 6px 2px; font-weight: 600; color: var(--primary-text); border-radius: 4px; transition: color .18s, background-color .18s; }
+.role-first-login .login-register a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.role-first-login .login-security { color: var(--login-muted); margin-top: 20px; padding-top: 17px; border-top: 1px solid var(--border); font-size: 10px; }
+@media(min-width:768px) {
+  .role-first-login .login-story { position: sticky; top: 0; height: 100vh; }
+}
+@media(max-width:767px) {
+  .role-first-login .login-story { padding: 21px 25px; }
+  .role-first-login .login-story-content { display: none; }
+  .role-first-login .login-main { padding: 25px; }
+  .role-first-login .auth-theme-toggle { top: 19px; right: 21px; }
+  .role-first-login .login-form-wrap { margin-top: 27px; }
+  .role-first-login .campus-role-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .role-first-login .campus-role-card { min-height: 88px; }
+}
+@media(max-width:360px) {
+  .role-first-login .login-main { padding: 23px 18px; }
+  .role-first-login .form-between { gap: 8px; flex-wrap: wrap; }
+  .role-first-login .auth-theme-toggle { right: 14px; }
+}
+@media(max-width:290px) {
+  .role-first-login .campus-role-grid { grid-template-columns: 1fr; }
+  .role-first-login .login-submit-arrow { display: none; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .role-first-login :is(.campus-role-card,.campus-role-icon,.role-check,.login-register a) { transition: none; transform: none; }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "smartstay-campus-residence",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env.local server/server.js",
+    "setup:admin": "node scripts/setup-admin.js",
+    "check": "node scripts/check.js",
+    "test": "node --test tests/workflows.test.js tests/accounts.test.js tests/email-access.test.js tests/admin-registration.test.js",
+    "test:browser": "node tests/browser.test.js",
+    "test:login-browser": "node tests/login-browser.js",
+    "test:registration-browser": "node tests/registration-browser.js",
+    "test:admin-registration-browser": "node tests/admin-registration-browser.js",
+    "test:theme-browser": "node tests/theme-browser.js",
+    "test:validation-browser": "node tests/validation-browser.js"
+  }
+}

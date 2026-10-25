@@ -1,0 +1,80 @@
+/* One shared photographic treatment for the university entrance.
+   The source PNG is unchanged. A small, uniform display crop excludes its baked-in
+   navy frame, keeping the entrance and the complete university name in view. */
+:root .campus-photo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 5 / 2;
+  overflow: hidden;
+  border: 1px solid var(--border-default, var(--line, #d9e1ec));
+  border-radius: var(--radius-card, 14px);
+  background: var(--surface, #ffffff);
+  box-shadow: var(--shadow-card, 0 4px 14px rgba(23, 43, 77, .06));
+}
+:root .campus-photo > img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  object-fit: cover;
+  object-position: 50% 50%;
+  transform: scale(1.07);
+  opacity: 1;
+  filter: none;
+  mix-blend-mode: normal;
+  box-shadow: none;
+}
+
+/* Preserve the hero composition and keep its small overlays off the gate name. */
+:root .hero-art { padding: 20px 0 30px; }
+:root .hero-art .art-label { top: 4px; left: 12px; max-width: calc(100% - 24px); z-index: 1; }
+:root .hero-art > .campus-photo {
+  border-color: var(--border-interactive, var(--line, #d9e1ec));
+  border-radius: var(--radius-major, 18px);
+  box-shadow: var(--shadow-featured, 0 8px 22px rgba(23, 43, 77, .10));
+}
+:root .hero-art .art-float {
+  position: relative;
+  left: auto;
+  bottom: auto;
+  width: max-content;
+  max-width: calc(100% - 32px);
+  margin: -24px 0 0 20px;
+  z-index: 1;
+}
+
+:root .login-story-content > .campus-photo {
+  width: 85%;
+  max-width: 640px;
+  margin-top: 35px;
+}
+
+/* A real photograph remains a clear thumbnail, rather than a faded background. */
+:root .welcome-banner:has(> .campus-photo) { gap: 20px; }
+:root .welcome-banner:has(> .campus-photo) > .banner-left { min-width: 0; }
+:root .welcome-art.campus-photo {
+  flex: 0 0 clamp(180px, 26%, 280px);
+  width: auto;
+  pointer-events: none;
+}
+:root .hostel-card-art.campus-photo {
+  border: 0;
+  border-bottom: 1px solid var(--border-default, var(--line, #d9e1ec));
+  border-radius: 0;
+  box-shadow: none;
+}
+
+@media (max-width: 1023px) {
+  :root .login-story-content > .campus-photo { width: 100%; }
+}
+@media (max-width: 767px) {
+  :root .hero-art > .campus-photo { box-shadow: var(--shadow-card, 0 4px 14px rgba(23, 43, 77, .06)); }
+  :root .hero-art .art-float { margin-left: 12px; max-width: calc(100% - 24px); }
+  :root .login-story-content > .campus-photo { display: none; }
+  :root .welcome-banner:has(> .campus-photo) { flex-wrap: wrap; gap: 14px; }
+  :root .welcome-art.campus-photo { flex-basis: 240px; max-width: 100%; margin-left: auto; }
+}

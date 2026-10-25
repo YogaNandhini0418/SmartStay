@@ -1,0 +1,242 @@
+/* Shared semantic palette. The existing styles remain the light-mode baseline. */
+:root {
+  --background: #f7f8fb;
+  --surface: #ffffff;
+  --surface-secondary: #f1f3f9;
+  --surface-hover: #edf1f8;
+  --text-primary: #1c2b42;
+  --text-secondary: #63748a;
+  --border-subtle: #e8edf3;
+  --border-default: #d9e1ec;
+  --border-interactive: #9fb5d2;
+  --border-focus: #3262dd;
+  --border-featured: var(--border-interactive);
+  --border: var(--border-default);
+  --line: var(--border-default);
+  --radius-small: 8px;
+  --radius-control: 10px;
+  --radius-card: 14px;
+  --radius-major: 18px;
+  --shadow-card: 0 2px 8px rgba(23, 43, 77, .04);
+  --shadow-raised: 0 8px 22px rgba(23, 43, 77, .10);
+  --shadow-featured: 0 10px 24px rgba(23, 43, 77, .10);
+  --shadow-dialog: 0 16px 48px rgba(11, 30, 73, .18);
+  --shadow: var(--shadow-card);
+  --raised-shadow: var(--shadow-raised);
+  --dialog-shadow: var(--shadow-dialog);
+  --primary: #3262dd;
+  --primary-hover: #2553c8;
+  --primary-text: #3262dd;
+  --on-primary: #ffffff;
+  --success: #278363;
+  --success-surface: #edf7f2;
+  --warning: #93651e;
+  --warning-surface: #fff6e6;
+  --danger: #b44242;
+  --danger-surface: #fff0f0;
+  --info: #3e5da9;
+  --info-surface: #edf2ff;
+  --neutral: #5f7086;
+  --neutral-surface: #f1f3f6;
+  --purple: #9573c6;
+  --purple-surface: #f2edfc;
+  --chart-present: #6c8bd4;
+  --chart-absent: #dcba7b;
+  --chart-leave: #ada1cd;
+  --chart-outside: #cfd8e7;
+  --chart-medical: #a3c5c1;
+  --chart-empty: #dddddd;
+  --chart-bar-1: #7896cf;
+  --chart-bar-2: #a3a9d2;
+  --chart-bar-3: #baa4ca;
+  --chart-bar-4: #d2b380;
+  --focus: var(--border-focus);
+}
+
+smartstay-theme-toggle { display: inline-flex; flex-shrink: 0; vertical-align: middle; }
+.theme-toggle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; padding: 0; flex-shrink: 0;
+  border: 1px solid var(--border-default); border-radius: var(--radius-control);
+  background: transparent; color: var(--text-secondary); cursor: pointer;
+  transition: background-color .15s, color .15s, border-color .15s;
+}
+.theme-toggle:hover { background: var(--surface-hover); color: var(--text-primary); border-color: var(--border-interactive); }
+.theme-toggle:focus-visible { outline: 2px solid var(--border-focus); outline-offset: 2px; }
+
+/* Each control owns one edge. Compound search controls focus their outer surface. */
+:root :is(.btn, input, select, textarea) { border-radius: var(--radius-control); }
+/* Text controls show mouse and keyboard focus through their existing border only.
+   Checkboxes, sliders and buttons retain their separate keyboard focus treatment. */
+:root :is(input:not(:is([type="checkbox"], [type="radio"], [type="range"], [type="button"], [type="submit"], [type="reset"], [type="image"], [type="hidden"])), select, textarea):is(:focus, :focus-visible) {
+  border-color: var(--border-focus); outline: none; outline-offset: 0; box-shadow: none;
+}
+:root :is(.icon-btn, .nav-link, .stat-icon, .activity-icon, .bed-icon, .info-banner, .badge, .tag, .nav-count, .status-mini, .occupancy-summary, .maintenance-breakdown > div) { border-radius: var(--radius-small); }
+:root :is(.panel, .stat-card, .secondary-stats, .quick-link, .toolbar, .room-card, .contact-card, .gate-scan, .scan-result, .registration-success, .campus-guide, .room-bed, .welcome-banner, .sos-panel) { border-radius: var(--radius-card); }
+:root :is(.room-card, .quick-link):focus-visible { box-shadow: none; }
+:root dialog { border-color: var(--border-default); border-radius: var(--radius-major); box-shadow: var(--shadow-dialog); }
+:root :is(.search-results, .toast) { border-radius: var(--radius-control); box-shadow: var(--shadow-raised); }
+:root :is(.search-field, .global-search > label) { border-radius: var(--radius-control); }
+/* Reserve the global search edge without moving its content or neighbouring items. */
+:root .global-search > label { border: 1px solid transparent; margin: -1px; }
+:root[data-theme] :is(.search-field, .global-search > label):has(input:not(:disabled)):hover:not(:focus-within) { border-color: var(--border-interactive); }
+:root[data-theme] :is(.search-field, .global-search > label):focus-within { border-color: var(--border-focus); outline: none; outline-offset: 0; box-shadow: none; }
+:root :is(.search-field, .global-search) input { border: 0; }
+:root :is(.btn, .icon-btn, .theme-toggle, .nav-link, a):focus:not(:focus-visible) { outline: none; }
+.login-main { position: relative; }
+.auth-theme-toggle { position: absolute; top: 25px; right: 35px; }
+.registration-page .auth-theme-toggle { top: 77px; }
+.theme-changing :is(body, .panel, .stat-card, .topbar, .secondary-stats, .room-card, .toolbar, dialog) {
+  transition: background-color .15s, color .15s, border-color .15s;
+}
+
+@media screen {
+  :root[data-theme="dark"] {
+    --background: #0f1726;
+    --surface: #182438;
+    --surface-secondary: #1e2c43;
+    --surface-hover: #25354f;
+    --sidebar-surface: #0a1220;
+    --text-primary: #edf2fa;
+    --text-secondary: #b0bed2;
+    --border-subtle: #27364c;
+    --border-default: #33435c;
+    --border-interactive: #54749e;
+    --border-focus: #9fbfff;
+    --primary: #3262dd;
+    --primary-hover: #3c6feb;
+    --primary-text: #a5c1ff;
+    --on-primary: #ffffff;
+    --success: #8ae0b8;
+    --success-surface: #173b31;
+    --warning: #f4ce88;
+    --warning-surface: #3d301c;
+    --danger: #ffb1b1;
+    --danger-surface: #44272f;
+    --danger-action: #b93845;
+    --danger-action-hover: #a92f3d;
+    --info: #aec8ff;
+    --info-surface: #21365a;
+    --neutral: #c1cbdc;
+    --neutral-surface: #29374c;
+    --purple: #cdb6ff;
+    --purple-surface: #33294e;
+    --gate-event-text: var(--text-secondary);
+    --hint-text: var(--text-secondary);
+    --room-card-surface: var(--surface);
+    --hostel-art-background: var(--surface-secondary);
+    --chart-present: #7ea5f8;
+    --chart-absent: #e8bc71;
+    --chart-leave: #c0a9ed;
+    --chart-outside: #8c9db7;
+    --chart-medical: #81d0bd;
+    --chart-empty: #42536d;
+    --chart-bar-1: #7ea5f8;
+    --chart-bar-2: #a5b4f2;
+    --chart-bar-3: #c0a9ed;
+    --chart-bar-4: #e8bc71;
+    --ink: var(--text-primary);
+    --muted: var(--text-secondary);
+    --line: var(--border);
+    --bg: var(--background);
+    --blue-light: var(--info-surface);
+    --shadow-card: 0 2px 8px rgba(0, 5, 14, .15);
+    --shadow-raised: 0 8px 22px rgba(0, 5, 14, .24);
+    --shadow-featured: 0 10px 24px rgba(0, 5, 14, .24);
+    --shadow-dialog: 0 16px 48px rgba(0, 5, 14, .38);
+    --backdrop: #030915bc;
+    color-scheme: dark;
+  }
+
+  :root[data-theme="dark"] :is(.landing, .login-page) { background: var(--background); }
+  :root[data-theme="dark"] :is(.sidebar, .login-story, .sidebar-footer) { background: var(--sidebar-surface); }
+  :root[data-theme="dark"] :is(.panel, .stat-card, .secondary-stats, .quick-link, .toolbar, .room-card, .gate-scan, .contact-card, .topbar, .search-results, .pagination .icon-btn, .registration-success, .skip-link, .art-float, dialog) {
+    background: var(--surface); border-color: var(--border);
+  }
+  :root[data-theme="dark"] :is(.welcome-banner, .occupancy-summary, .maintenance-breakdown > div, .scan-result, .auth-mode, .safety-section, .hostel-team-list small, .hostel-card-art) {
+    background: var(--surface-secondary); border-color: var(--border);
+  }
+  :root[data-theme="dark"] :is(.search-results, .art-float) { box-shadow: var(--raised-shadow); }
+  :root[data-theme="dark"] dialog { box-shadow: var(--dialog-shadow); }
+  :root[data-theme="dark"] dialog::backdrop { background: var(--backdrop); }
+  :root[data-theme="dark"] :is(input, select, textarea, option, .search-field, .table-filters select, .hostel-scope select) {
+    background: var(--surface); color: var(--text-primary); border-color: var(--border);
+  }
+  :root[data-theme="dark"] :is(input, textarea)::placeholder { color: var(--text-secondary); }
+  :root[data-theme="dark"] :is(input, select, textarea):focus { border-color: var(--border-focus); }
+  :root[data-theme="dark"] .global-search input { background: transparent; }
+  :root[data-theme="dark"] :is(label, .eyebrow, .brand small, .person small, .breadcrumb, .breadcrumb b, .global-search > label, .global-search kbd, .page-heading p, .date-label, .welcome-banner p, .stat-top > span:first-child, .stat-card > small, .secondary-stat small, .panel-heading p, .occupancy-summary small, .occupancy-summary p, .hostel-bar-label, .hostel-bar-label small, .donut-center span, .legend-row, .attendance-footer, .panel th, .panel td, .list-item p, .list-item time, .maintenance-breakdown span, .campus-footer, .table-footer, .room-card small, .room-card-bottom, .hostel-card-info p, .hostel-numbers small, .staff-card p, .staff-details, .tab, .ticket-code, .ticket-card p, .ticket-meta, .gate-scan > p, .contact-card small, .iot-card > small, .iot-card-footer, .notification-row p, .notification-row small, .profile-detail p, .detail-grid small, .detail-section p, .timeline-item small, .room-bed small, .bar-col small, .bar-col b, .feedback-row, .feedback-row small, .modal-heading p, .modal-body > p, .confirm-message, .landing-links, .hero-copy > p, .hero-trust, .hero-trust small, .art-float small, .art-caption, .landing-stats span, .landing-section > p, .feature-card p, .safety-section p, .safety-points, .landing-footer p, .landing-footer > div:not(:first-child) a, .landing-footer .text-button, .landing-footer .footer-bottom, .back-link, .login-security, .registration-success p, .hostel-scope, .hostel-scope .scope-label, .approval-context, .auth-mode button, .empty-state, .initial-loading) {
+    color: var(--text-secondary);
+  }
+  :root[data-theme="dark"] :is(.secondary-stat b, .legend-row b, .panel td b, .empty-state h3, .auth-mode button.active) { color: var(--text-primary); }
+  :root[data-theme="dark"] :is(.list-item, .panel th, .panel td, .attendance-footer, .table-tools, .table-footer, .room-card-bottom, .tabs, .detail-grid > div, .timeline, .ticket-meta, .iot-card-footer, .feedback-row, .art-float, .safety-section, .toast) { border-color: var(--border); }
+  :root[data-theme="dark"] .panel thead { background: var(--surface-secondary); }
+  :root[data-theme="dark"] :is(.panel tbody tr:hover, .search-results a:hover, .quick-link:hover, .icon-btn:hover) { background: var(--surface-hover); }
+  :root[data-theme="dark"] .icon-btn { color: var(--text-secondary); }
+  :root[data-theme="dark"] .icon-btn:hover { color: var(--text-primary); }
+  :root[data-theme="dark"] .nav-label { color: var(--text-secondary); }
+  :root[data-theme="dark"] .nav-link.active { background: var(--info-surface); }
+  :root[data-theme="dark"] .sidebar-nav { scrollbar-color: var(--border) transparent; }
+  :root[data-theme="dark"] .sidebar-footer { border-color: var(--border); }
+  :root[data-theme="dark"] .btn.primary { background: var(--primary); color: var(--on-primary); }
+  :root[data-theme="dark"] .btn.primary:hover { background: var(--primary-hover); }
+  :root[data-theme="dark"] .btn.danger { background: var(--danger-action); color: var(--on-primary); }
+  :root[data-theme="dark"] .btn.danger:hover { background: var(--danger-action-hover); }
+  :root[data-theme="dark"] :is(.btn.outline) { background: var(--surface); color: var(--text-primary); border-color: var(--border-default); }
+  :root[data-theme="dark"] .btn.outline:hover { background: var(--surface-hover); border-color: var(--border-interactive); }
+  :root[data-theme="dark"] :is(.btn.ghost, .text-button, .auth-link a, .contact-card a, .occupancy-summary > div:last-child) { color: var(--primary-text); }
+  :root[data-theme="dark"] .btn.soft { background: var(--info-surface); color: var(--info); }
+  :root[data-theme="dark"] .tab.active { color: var(--primary-text); border-bottom-color: var(--primary-text); }
+  :root[data-theme="dark"] .badge.green { background: var(--success-surface); color: var(--success); }
+  :root[data-theme="dark"] .badge.blue { background: var(--info-surface); color: var(--info); }
+  :root[data-theme="dark"] :is(.badge.amber, .tag, .status-mini) { background: var(--warning-surface); color: var(--warning); border-color: var(--warning-surface); }
+  :root[data-theme="dark"] .badge.red { background: var(--danger-surface); color: var(--danger); }
+  :root[data-theme="dark"] .badge.neutral { background: var(--neutral-surface); color: var(--neutral); }
+  :root[data-theme="dark"] :is(.stat-icon.blue, .activity-icon, .feature-icon, .art-icon, .bed-icon) { background: var(--info-surface); color: var(--info); }
+  :root[data-theme="dark"] :is(.stat-icon.purple, .feature-card:nth-child(3n) .feature-icon) { background: var(--purple-surface); color: var(--purple); }
+  :root[data-theme="dark"] :is(.stat-icon.teal, .bed-icon.available, .verified, .mini-actions .icon-btn) { background: var(--success-surface); color: var(--success); border-color: var(--border); }
+  :root[data-theme="dark"] :is(.stat-icon.amber, .feature-card:nth-child(2n) .feature-icon, .profile-menu .avatar, .safety-emblem span) { background: var(--warning-surface); color: var(--warning); }
+  :root[data-theme="dark"] :is(.mini-actions .reject, .emergency-shortcut, .sos-panel, .sos-panel .stat-icon) { background: var(--danger-surface); color: var(--danger); border-color: var(--danger-surface); }
+  :root[data-theme="dark"] :is(.sos-panel h2, .sos-panel p, .form-error) { color: var(--danger); }
+  :root[data-theme="dark"] :is(.info-banner, .feedback-row b, .hero h1 em, .hero .eyebrow, .landing-section .eyebrow, .safety-section .eyebrow) { color: var(--warning); }
+  :root[data-theme="dark"] .info-banner { background: var(--warning-surface); border-color: var(--warning-surface); }
+  :root[data-theme="dark"] .info-banner.blue { background: var(--info-surface); color: var(--info); border-color: var(--info-surface); }
+  :root[data-theme="dark"] .avatar { background: var(--info-surface); color: var(--info); border-color: var(--surface); }
+  :root[data-theme="dark"] .avatar-stack b { background: var(--neutral-surface); color: var(--neutral); border-color: var(--background); }
+  :root[data-theme="dark"] .avatar-stack b:nth-child(2) { background: var(--warning-surface); color: var(--warning); }
+  :root[data-theme="dark"] .avatar-stack b:nth-child(3) { background: var(--purple-surface); color: var(--purple); }
+  :root[data-theme="dark"] .progress-track { background: var(--surface-hover); }
+  :root[data-theme="dark"] .donut:before { background: var(--surface); }
+  :root[data-theme="dark"] :is(.bar-col b, .maintenance-breakdown b) { color: var(--primary-text); }
+  :root[data-theme="dark"] .notification-row.unread { background: var(--info-surface); }
+  :root[data-theme="dark"] .timeline-item:before { border-color: var(--surface); }
+  :root[data-theme="dark"] .auth-mode button.active { background: var(--surface); }
+  :root[data-theme="dark"] .approval-tabs .tab span { background: var(--neutral-surface); color: var(--neutral); }
+  :root[data-theme="dark"] .hostel-card-art .badge { background: var(--surface); color: var(--text-primary); }
+  :root[data-theme="dark"] .safety-emblem { background: var(--info-surface); color: var(--info); }
+  :root[data-theme="dark"] .safety-emblem span { border-color: var(--surface-secondary); }
+  :root[data-theme="dark"] .art-label { background: var(--surface-secondary); color: var(--text-secondary); border-color: var(--border); }
+  :root[data-theme="dark"] .hero-buttons .hero-register { color: var(--primary-text); border-color: var(--border); }
+  :root[data-theme="dark"] .hero-buttons .hero-register:hover { background: var(--info-surface); border-color: var(--primary-text); }
+  :root[data-theme="dark"] .toast { background: var(--surface); color: var(--success); border-color: var(--success); box-shadow: var(--raised-shadow); }
+  :root[data-theme="dark"] .toast.error { color: var(--danger); border-color: var(--danger); }
+  :root[data-theme="dark"] .skeleton { background: linear-gradient(90deg, var(--surface-secondary), var(--surface-hover), var(--surface-secondary)); }
+  :root[data-theme="dark"] :focus-visible { outline-color: var(--focus); }
+}
+
+@media (max-width: 1023px) {
+  .registration-page .auth-theme-toggle { top: 72px; }
+  .topbar-right { gap: 8px; }
+  .global-search input { width: 100px; }
+}
+@media (max-width: 767px) {
+  .auth-theme-toggle { top: 18px; right: 22px; }
+  .topbar-right { gap: 6px; }
+  .topbar-right .theme-toggle { width: 30px; height: 30px; }
+  .global-search input { width: 68px; }
+}
+@media (max-width: 600px) { .registration-page .auth-theme-toggle { top: 67px; } }
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle, .theme-changing :is(body, .panel, .stat-card, .topbar, .secondary-stats, .room-card, .toolbar, dialog) { transition: none; }
+}
+@media print { :root { color-scheme: light !important; } smartstay-theme-toggle { display: none; } }
